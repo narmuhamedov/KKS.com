@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from datetime import datetime
-from blog.models import BlogTable
+from blog.models import BlogTable, About
 
 
 def blog_view(request):
@@ -18,7 +18,10 @@ def blog_detail_view(request, id):
                       context={'blog_id': blog_id})
 
 
-
+def about_view(request):
+    if request.method == "GET":
+        about = About.objects.all()
+        return render(request, template_name='about.html', context={'about': about})
 
 
 

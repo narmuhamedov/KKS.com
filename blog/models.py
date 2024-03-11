@@ -1,6 +1,15 @@
 from django.db import models
 
 
+class About(models.Model):
+    text = models.TextField()
+    logo = models.ImageField()
+
+    def __str__(self):
+        return self.text
+
+
+
 class BlogTable(models.Model):
     title = models.CharField(max_length=100)
     image = models.ImageField(upload_to='')
