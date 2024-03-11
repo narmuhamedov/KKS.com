@@ -6,6 +6,8 @@ class BlogTable(models.Model):
     image = models.ImageField(upload_to='')
     description = models.TextField()
     instagram = models.URLField()
+    music = models.FileField(upload_to='music/', null=True)
+    price = models.PositiveIntegerField(null=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

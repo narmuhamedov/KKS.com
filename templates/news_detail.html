@@ -1,0 +1,21 @@
+{% include 'header.html' %}
+
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-6">
+      <h2>{{blog_id.title}}</h2>
+      <p>{{blog_id.description}}</p>
+       <img src="{{blog_id.image.url}}" alt="Description of your image" class="img-fluid mb-3">
+      <a href="{{blog_id.instagram}}" target="_blank" rel="noopener noreferrer">Instagram</a>
+      <!-- Audio Player -->
+      <audio controls>
+        <source src="{{blog_id.music.url}}" type="audio/mp3">
+        Your browser does not support the audio tag.
+      </audio>
+      <p>{{blog_id.price}}</p>
+      <p class="text-muted mt-3">Published on: <span class="text-primary">{{blog_id.created_at}}</span></p>
+    </div>
+  </div>
+</div>
+
+{% include 'footer.html' %}

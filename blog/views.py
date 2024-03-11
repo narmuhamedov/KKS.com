@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from datetime import datetime
 from blog.models import BlogTable
@@ -9,6 +9,13 @@ def blog_view(request):
         blog = BlogTable.objects.all()
         return render(request, template_name="news.html",
                       context={'blog': blog})
+
+
+def blog_detail_view(request, id):
+    if request.method == "GET":
+        blog_id = get_object_or_404(BlogTable, id=id)
+        return render(request, template_name='news_detail.html',
+                      context={'blog_id': blog_id})
 
 
 
