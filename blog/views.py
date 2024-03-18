@@ -1,14 +1,20 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from datetime import datetime
-from blog.models import BlogTable, About
+from blog.models import BlogTable, About, Contact, Motto, Slider
 
 
 def blog_view(request):
     if request.method == "GET":
         blog = BlogTable.objects.all()
+        motto = Motto.objects.all()
+        slider = Slider.objects.all()
         return render(request, template_name="news.html",
-                      context={'blog': blog})
+                      context={
+                          'blog': blog,
+                          'motto': motto,
+                          'slider': slider
+                      })
 
 
 def blog_detail_view(request, id):
@@ -24,8 +30,10 @@ def about_view(request):
         return render(request, template_name='about.html', context={'about': about})
 
 
-
-
+def contact_view(request):
+    if request.method == "GET":
+        contact = Contact.objects.all()
+        return render(request, template_name='contact.html', context={'contact': contact})
 
 
 # Greeting
