@@ -1,0 +1,26 @@
+{% include 'header.html' %}
+
+<div class="container mt-5">
+    <h2>Список заказов:</h2>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Название</th>
+            <th>Цена</th>
+            <th>Дедлайн</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for i in services %}
+        <tr>
+            <td>{{ i.title }}</td>
+            <td>{{ i.prepaid_expense }}</td>
+            <td>{{ i.dead_line }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+
+{% include 'footer.html' %}
