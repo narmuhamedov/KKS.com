@@ -1,0 +1,15 @@
+{% include 'header.html' %}
+
+
+<center>
+    <h1>Вы уверенны что хотите удалить заказ?</h1>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <button type="submit">Удалить</button>
+    </form>
+</center>
+
+
+
+<br><br><br><br><br><br><br><br><br>
+{% include 'footer.html' %}

@@ -16,11 +16,28 @@
             <td>{{ i.title }}</td>
             <td>{{ i.prepaid_expense }}</td>
             <td>{{ i.dead_line }}</td>
+            <td>
+                <button type="button" class="btn btn-success">
+                    <a href="/services_list/{{i.id}}/update/">Изменить</a>
+                </button>
+                <button type="button" class="btn btn-danger">
+                    <a href="/services_list/{{i.id}}/delete/">Удалить</a>
+                </button>
+            </td>
         </tr>
         {% endfor %}
         </tbody>
     </table>
+
 </div>
 
+<style>
+    a{
+        text-decoration: none;
+        font-weight: bolder;
+        color: white;
+    }
+</style>
 
+<br><br><br><br><br><br><br><br><br>
 {% include 'footer.html' %}

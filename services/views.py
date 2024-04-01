@@ -1,25 +1,47 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404
+
 from . import forms, models
 from django.http import HttpResponse
+from django.views import generic
 
 
-def service_list_view(request):
-    if request.method == 'GET':
-        services = models.Service.objects.all()
-        return render(request, template_name='services.html',
-                      context={
-                          'services': services
-                      })
+class ServiceListView(generic.ListView):
+    template_name = 'services.html'
+    context_object_name = 'services'
+    model = models.Service
+
+    def get_queryset(self):
+        return self.model.objects.all()
 
 
-def create_service(request):
-    if request.method == "POST":
-        form = forms.ServiceForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-            return HttpResponse('Вы оставили заказ ожидайте звонка специалиста,'
-                                '<a href="/services_list/">К моим заказам</a>')
-    else:
-        form = forms.ServiceForm()
-    return render(request, template_name='create_service.html',
-                  context={'form': form})
+class CreateServiceView(generic.CreateView):
+    template_name = 'create_service.html'
+    form_class = forms.ServiceForm
+    success_url = '/services_list/'
+
+    def form_valid(self, form):
+        print(form.cleaned_data)
+        return super(CreateServiceView, self).form_valid(form=form)
+
+
+class DeleteServiceView(generic.DeleteView):
+    template_name = 'confirm_delete.html'
+    success_url = '/services_list/'
+
+    def get_object(self, **kwargs):
+        service_id = self.kwargs.get("id")
+        return get_object_or_404(models.Service, id=service_id)
+
+
+class UpdateServiceView(generic.UpdateView):
+    template_name = 'update_service.html'
+    form_class = forms.ServiceForm
+    success_url = '/services_list/'
+
+    def get_object(self, **kwargs):
+        service_id = self.kwargs.get("id")
+        return get_object_or_404(models.Service, id=service_id)
+
+    def form_valid(self, form):
+        print(form.cleaned_data)
+        return super(UpdateServiceView, self).form_valid(form=form)

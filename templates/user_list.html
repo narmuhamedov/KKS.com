@@ -1,0 +1,7 @@
+<h1>Ура у тебя получилось</h1>
+
+
+<form action="{% url 'persons:logout' %}" method="POST">
+    {% csrf_token %}
+    <button type="submit">Выйти из аккаунта</button>
+</form>
